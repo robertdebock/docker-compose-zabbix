@@ -1,0 +1,18 @@
+version: '2'
+services:
+  zabbix-web:
+    image: zabbix/zabbix-web-nginx-mysql
+    env_file: "variables.env"
+    links:
+      - mysql-server
+      - zabbix-server
+    ports:
+      - 80:80
+  zabbix-server:
+    image: zabbix/zabbix-server-mysql
+    env_file: "variables.env"
+    links:
+      - mysql-server
+  mysql-server:
+    image: mysql
+    env_file: "variables.env"
